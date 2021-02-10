@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+
+{% block title 'Edit Pin ' ~ pin.id %}
+
+{% block body %}
+    <div><h1>Edit Pin #{{ pin.id }}</h1></div>
+
+    {{ form(pinForm) }}
+{% endblock %}

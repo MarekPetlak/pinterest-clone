@@ -7,5 +7,8 @@
     <h1>{{ pin.title }}</h1>
     <p>{{ pin.description }}</p>
 </article>
-    <nav><a href="{{ path('homepage') }}">Return to Homepage</a></nav>
+    <nav>
+        <a href="{{ path('pin_edit', {id: pin.id}) }}">Edit</a> |
+        <a href="{{ path('homepage') }}">Return to Homepage</a>
+    </nav>
 {% endblock %}
