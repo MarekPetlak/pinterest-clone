@@ -60,7 +60,7 @@ class PinController extends AbstractController
 
 
     /**
-     * @Route("/{id<\d+>}/edit", name="edit", methods={"GET","POST"})
+     * @Route("/{id<\d+>}/edit", name="edit", methods={"GET","PUT"})
      */
     public function edit(Pin $pin, Request $request): Response
     {
@@ -68,7 +68,7 @@ class PinController extends AbstractController
             PinType::class,
             $pin,
             [
-                'method' => 'POST'
+                'method' => 'PUT'
             ]
         );
 
