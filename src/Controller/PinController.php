@@ -85,4 +85,15 @@ class PinController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/{id<\d+>}/delete", name="delete", methods="DELETE")
+     */
+    public function delete(Pin $pin): Response
+    {
+        $this->em->remove($pin);
+        $this->em->flush();
+
+        return $this->redirectToRoute('homepage');
+    }
+
 }
