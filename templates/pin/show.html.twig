@@ -16,6 +16,7 @@
         ">Delete</a> |
         <form id="pin-delete-form" action="{{ path('pin_delete', {id: pin.id}) }}" method="POST" style="display: none" >
             <input type="hidden" name="_method" value="DELETE">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token('pin_deletion_' ~ pin.id) }}">
         </form>
         <a href="{{ path('homepage') }}">Return to Homepage</a>
     </nav>

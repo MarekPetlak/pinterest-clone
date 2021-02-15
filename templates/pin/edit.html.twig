@@ -5,5 +5,5 @@
 {% block body %}
     <div><h1>Edit Pin #{{ pin.id }}</h1></div>
 
-    {{ form(pinForm) }}
+    {{ include('pin/_form.html.twig', {submitButtonText: 'zapisz zaminy'}) }}
 {% endblock %}
