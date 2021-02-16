@@ -5,7 +5,7 @@
 {% block body %}
     <h1>{{ pluralize(pins|length, 'Pin') }}</h1>
 
-    {{ include('partials/_flash_messages.html.twig') }}
+    {{ include('partial/_flash_messages.html.twig') }}
 
     {% for pin in pins %}
     <article>
