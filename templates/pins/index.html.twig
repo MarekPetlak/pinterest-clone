@@ -5,13 +5,13 @@
 {% block body %}
     <h1>{{ pluralize(pins|length, 'Pin') }}</h1>
 
-    {{ include('partial/_flash_messages.html.twig') }}
+    {{ include('partials/_flash_messages.html.twig') }}
 
     {% for pin in pins %}
-    <article>
-        <h3><a href="{{ path('pin_show', {id: pin.id}) }}">{{ pin.title }}</a></h3>
-        <p>{{ pin.description|u.truncate(25, '...', false) }}</p>
-        <p>Submitted {{ pin.createdAt|date('D, Y F d') }} ({{ pin.createdAt|ago }})</p>
-    </article>
+        <article>
+            <h3><a href="{{ path('pin_show', {id: pin.id}) }}">{{ pin.title }}</a></h3>
+            <p>{{ pin.description|u.truncate(25, '...', false) }}</p>
+            <p>Submitted {{ pin.createdAt|date('D, Y F d') }} <small>({{ pin.createdAt|ago }})</small></p>
+        </article>
     {% endfor  %}
 {% endblock %}
