@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Pin;
 use App\Form\PinType;
+use App\Repository\PinRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,12 +16,11 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class PinController extends AbstractController
 {
+    private PinRepository $pinRepository;
 
-    private EntityManagerInterface $em;
-
-    public function __construct(EntityManagerInterface $em)
+    public function __construct(PinRepository $pinRepository)
     {
-        $this->em = $em;
+        $this->pinRepository = $pinRepository;
     }
 
     /**
@@ -49,8 +49,7 @@ class PinController extends AbstractController
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->em->persist($pin);
-            $this->em->flush();
+            $this->pinRepository->save($pin);
 
             $this->addFlash('success', 'Pin successfully created');
 
@@ -76,7 +75,7 @@ class PinController extends AbstractController
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->em->flush();
+            $this->pinRepository->save($pin);
 
             $this->addFlash('success', 'Pin successfully updated');
 
@@ -98,8 +97,7 @@ class PinController extends AbstractController
             sprintf('pin_deletion_%d', $pin->getId()),
             $request->request->get('csrf_token'))
         ) {
-            $this->em->remove($pin);
-            $this->em->flush();
+            $this->pinRepository->remove($pin);
 
             $this->addFlash('success', 'Pin successfully deleted');
         }

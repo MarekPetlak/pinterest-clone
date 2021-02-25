@@ -1,0 +1,9 @@
+@import "~bootstrap";
+@import '_shared/_variables';
+
+html {
+    body {
+        font-family: $primary-font, sans-serif;
+        background-color: white;
+    }
+}
