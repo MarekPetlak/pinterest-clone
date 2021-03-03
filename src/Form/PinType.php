@@ -31,7 +31,7 @@ class PinType extends AbstractType
                 'download_label' => 'Download',
                 'download_uri' => true,
                 'image_uri' => true,
-                'imagine_pattern' => null,
+                'imagine_pattern' => 'squared_thumbnail_small',
                 'asset_helper' => true,
                 'constraints' => [
                     new Image(['maxSize' => '5M'])

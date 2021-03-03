@@ -90,6 +90,9 @@
     "gedmo/doctrine-extensions": {
         "version": "v3.0.3"
     },
+    "imagine/imagine": {
+        "version": "1.2.4"
+    },
     "jms/metadata": {
         "version": "2.4.0"
     },
@@ -123,6 +126,19 @@
     },
     "league/mime-type-detection": {
         "version": "1.7.0"
+    },
+    "liip/imagine-bundle": {
+        "version": "1.8",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "1.8",
+            "ref": "5a5bdc2d0e2533ed6935d5ae562f2b318a8fc1ee"
+        },
+        "files": [
+            "config/packages/liip_imagine.yaml",
+            "config/routes/liip_imagine.yaml"
+        ]
     },
     "nikic/php-parser": {
         "version": "v4.10.4"
@@ -308,6 +324,9 @@
     },
     "symfony/polyfill-php80": {
         "version": "v1.22.0"
+    },
+    "symfony/process": {
+        "version": "v5.2.3"
     },
     "symfony/profiler-pack": {
         "version": "v1.0.5"
