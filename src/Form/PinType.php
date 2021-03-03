@@ -8,6 +8,8 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Image;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class PinType extends AbstractType
 {
@@ -19,15 +21,28 @@ class PinType extends AbstractType
                 TextType::class,
                 [
                     'required' => true,
-                    'label'    => 'Tytuł: '
+                    'label'    => 'Title: '
                 ]
             )
+            ->add('imageFile', VichImageType::class, [
+                'required' => false,
+                'allow_delete' => true,
+                'delete_label' => 'Remove image',
+                'download_label' => 'Download',
+                'download_uri' => true,
+                'image_uri' => true,
+                'imagine_pattern' => null,
+                'asset_helper' => true,
+                'constraints' => [
+                    new Image(['maxSize' => '5M'])
+                ]
+            ])
             ->add(
                 'description',
                 TextareaType::class,
                 [
                     'required' => true,
-                    'label'    => 'Opis: '
+                    'label'    => 'Description: '
                 ]
             )
         ;

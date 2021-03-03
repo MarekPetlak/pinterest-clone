@@ -19,6 +19,11 @@ class PinRepository extends ServiceEntityRepository
         parent::__construct($registry, Pin::class);
     }
 
+    public function findOneByImageName(string $name): ?Pin
+    {
+        return $this->findOneBy(['imageName' => $name]);
+    }
+
     public function remove(Pin $pin): void
     {
         $this->_em->remove($pin);

@@ -15,7 +15,7 @@ trait Timestampable
      * @Gedmo\Timestampable(on="create")
      * @ORM\Column(type="datetime")
      */
-    protected $createdAt;
+    protected DateTimeInterface $createdAt;
 
     /**
      * @var DateTime $updatedAt
@@ -23,7 +23,7 @@ trait Timestampable
      * @Gedmo\Timestampable(on="update")
      * @ORM\Column(type="datetime")
      */
-    protected $updatedAt;
+    protected DateTimeInterface $updatedAt;
 
 
     public function getCreatedAt(): DateTimeInterface
@@ -36,4 +36,11 @@ trait Timestampable
         return $this->updatedAt;
     }
 
+
+    public function setUpdatedAt(DateTimeInterface $updatedAt): self
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
 }

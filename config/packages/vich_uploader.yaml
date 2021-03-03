@@ -1,0 +1,13 @@
+vich_uploader:
+    db_driver: orm
+    storage: flysystem
+
+    mappings:
+        pin_image:
+            uri_prefix: /uploads/pins
+            upload_destination: pin_image.storage
+            namer: Vich\UploaderBundle\Naming\SlugNamer
+
+            inject_on_load: false
+            delete_on_update: true
+            delete_on_remove: true

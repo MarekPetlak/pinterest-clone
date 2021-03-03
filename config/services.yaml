@@ -32,3 +32,10 @@ services:
 
     Twig\Extra\String\StringExtension:
         tags: [{ name: twig.extension}]
+
+
+    Vich\UploaderBundle\Naming\SlugNamer:
+        public: true
+        arguments:
+            $service: '@App\Repository\PinRepository'
+            $method: findOneByImageName
