@@ -3,15 +3,39 @@
 {% block title 'Pinterest Clone' %}
 
 {% block body %}
-    <h1>{{ pluralize(pins|length, 'Pin') }}</h1>
+
+    <h1 class=" mb-3 text-center text-muted">{{ pluralize(pins|length, 'Pin') }}</h1>
 
     {{ include('partials/_flash_messages.html.twig') }}
 
-    {% for pin in pins %}
-        <article>
-            <h3><a href="{{ path('pin_show', {id: pin.id}) }}">{{ pin.title }}</a></h3>
-            <p>{{ pin.description|u.truncate(25, '...', false) }}</p>
-            <p>Submitted {{ pin.createdAt|date('D, Y F d') }} <small>({{ pin.createdAt|ago }})</small></p>
-        </article>
-    {% endfor  %}
+    {%  if pins|length > 0 %}
+        {% for row in pins|batch(3) %}
+            <div class="row mb-5">
+                {% for pin in row %}
+                    <article class="col-md-4">
+                        <div class="card shadow">
+                            <div class="mw-100 overflow-hidden">
+                                <a href="{{ path('pin_show', {id: pin.id}) }}" title="View {{ pin.title }}">
+                                    <img src="{{ (pin.imageName ? vich_uploader_asset(pin) : asset('build/images/no-image.jpg')) | imagine_filter('squared_thumbnail_medium') }}"  class="card-img-top scalable" alt="{{ pin.title }}"/>
+                                </a>
+                            </div>
+                            <div class="card-body">
+                                <h3 class="card-title">
+                                    <a href="{{ path('pin_show', {id: pin.id}) }}" title="View {{ pin.title }}" class="text-decoration-none text-muted">{{ pin.title }}</a>
+                                </h3>
+                                <p class="card-text">{{ pin.description|u.truncate(50, '...', false) }}</p>
+                            </div>
+                            <div class="card-footer text-right">
+                                <small>Submitted  by [author]</small>
+                            </div>
+                        </div>
+
+                    </article>
+                {% endfor  %}
+            </div>
+        {% endfor  %}
+    {% else %}
+        <p class="text-center mt-5 mb-5">No pins yet. <a href="{{ path('pin_create') }}" title="Add new pin">Add one &#128521;</a></p>
+    {% endif %}
+
 {% endblock %}
