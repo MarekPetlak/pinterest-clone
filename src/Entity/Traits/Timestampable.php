@@ -6,6 +6,7 @@ namespace App\Entity\Traits;
 
 use DateTime;
 use DateTimeInterface;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 trait Timestampable
 {
