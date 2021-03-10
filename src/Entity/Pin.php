@@ -48,12 +48,18 @@ class Pin
      *
      * @var File|null
      */
-    private $imageFile;
+    private ?File $imageFile;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private ?string $imageName;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="pins")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private User $user;
 
     public function __construct()
     {
@@ -114,6 +120,18 @@ class Pin
     public function setImageName(?string $imageName): self
     {
         $this->imageName = $imageName;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }
