@@ -25,6 +25,8 @@ class PinController extends AbstractController
 
     /**
      * @Route("/{id<\d+>}", name="show", methods="GET")
+     * @param Pin $pin
+     * @return Response
      */
     public function show(Pin $pin): Response
     {
@@ -33,8 +35,10 @@ class PinController extends AbstractController
 
     /**
      * @Route("/create", name="create", methods={"GET","POST"})
+     * @param Request $request
+     * @return Response
      */
-    public function create(Request $request): Response
+    public function created(Request $request): Response
     {
         $pin = new Pin();
 
@@ -49,6 +53,7 @@ class PinController extends AbstractController
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+            $pin->setUser($this->getUser());
             $this->pinRepository->save($pin);
 
             $this->addFlash('success', 'Pin successfully created');
@@ -62,6 +67,9 @@ class PinController extends AbstractController
 
     /**
      * @Route("/{id<\d+>}/edit", name="edit", methods={"GET","PUT"})
+     * @param Pin $pin
+     * @param Request $request
+     * @return Response
      */
     public function edit(Pin $pin, Request $request): Response
     {
@@ -90,6 +98,9 @@ class PinController extends AbstractController
 
     /**
      * @Route("/{id<\d+>}/delete", name="delete", methods="DELETE")
+     * @param Pin $pin
+     * @param Request $request
+     * @return Response
      */
     public function delete(Pin $pin, Request $request): Response
     {

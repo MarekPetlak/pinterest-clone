@@ -6,17 +6,15 @@
     <div class="row">
         <div class="col-md-6 mx-auto">
 
-            <article>
-                <div class="card shadow mb-4">
+            <article class="card shadow mb-4">
                     <img src="{{ (pin.imageName ? vich_uploader_asset(pin) : asset('build/images/no-image.jpg')) }}"  class="card-img-top" alt="{{ pin.title }}"/>
                     <div class="card-body">
                         <h1 class="card-title text-muted h3">{{ pin.title }}</h1>
-                        <p class="card-text">{{ pin.description }}</p>
+                        <p class="card-text text-break">{{ pin.description }}</p>
                     </div>
                     <div class="card-footer text-right">
-                        <small>Submitted {{ pin.createdAt|date('D, Y F d') }} ({{ pin.createdAt|ago }})<br> by [author]</small>
+                        <small>Submitted {{ pin.createdAt|date('D, Y F d') }} ({{ pin.createdAt|ago }})<br> by {{ pin.user.fullName }}</small>
                     </div>
-                </div>
             </article>
 
             <nav class="text-right">

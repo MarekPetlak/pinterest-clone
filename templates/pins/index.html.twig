@@ -26,7 +26,7 @@
                                 <p class="card-text">{{ pin.description|u.truncate(50, '...', false) }}</p>
                             </div>
                             <div class="card-footer text-right">
-                                <small>Submitted  by [author]</small>
+                                <small>Submitted  by {{ pin.user.fullName }}</small>
                             </div>
                         </div>
 

@@ -194,4 +194,17 @@ class User implements UserInterface
         return $this;
     }
 
+    public function getFullName(): string
+    {
+        return sprintf(
+            '%s %s',
+            ucfirst($this->getFirstName()),
+            ucfirst($this->getLastName())
+        );
+    }
+
+    public function __toString(): string
+    {
+        return $this->getFullName();
+    }
 }

@@ -11,6 +11,8 @@ class PinsController extends AbstractController
 {
     /**
      * @Route("/", name="homepage", methods="GET")
+     * @param PinRepository $pinRepository
+     * @return Response
      */
     public function index(PinRepository $pinRepository): Response
     {
