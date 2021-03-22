@@ -38,7 +38,7 @@ class PinController extends AbstractController
      * @param Request $request
      * @return Response
      */
-    public function created(Request $request): Response
+    public function create(Request $request): Response
     {
         $pin = new Pin();
 
