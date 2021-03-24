@@ -13,10 +13,17 @@ use Symfony\Component\Mime\Address;
 class EmailConfirmationSubscriber implements EventSubscriberInterface
 {
     private EmailVerifier $emailVerifier;
+    private string $defaultSenderEmail;
+    private string $defaultSenderName;
 
-    public function __construct(EmailVerifier $emailVerifier)
-    {
+    public function __construct(
+        EmailVerifier $emailVerifier,
+        string $defaultSenderEmail,
+        string $defaultSenderName
+    ) {
         $this->emailVerifier = $emailVerifier;
+        $this->defaultSenderEmail = $defaultSenderEmail;
+        $this->defaultSenderName = $defaultSenderName;
     }
 
     public static function getSubscribedEvents(): iterable
@@ -26,16 +33,15 @@ class EmailConfirmationSubscriber implements EventSubscriberInterface
         ];
     }
 
-    public function sendConfirmationEmail(EmailConfirmationEvent $event)
-    {
+    public function sendConfirmationEmail(EmailConfirmationEvent $event) {
         $user = $event->getUser();
 
         $this->emailVerifier->sendEmailConfirmation('app_verify_email', $user,
             (new TemplatedEmail())
-                ->from(new Address('noreply@pinterest-clone.example', 'Pinterest Clone'))
+                ->from(new Address($this->defaultSenderEmail, $this->defaultSenderName))
                 ->to($user->getEmail())
                 ->subject('Please Confirm your Email')
-                ->htmlTemplate('registration/confirmation_email.html.twig')
+                ->htmlTemplate('emails/registration/confirmation.html.twig')
         );
     }
 }
