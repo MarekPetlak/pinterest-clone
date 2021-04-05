@@ -36,6 +36,8 @@
         "vich/uploader-bundle": "^1.16"
     },
     "require-dev": {
+        "phpstan/phpstan": "^0.12.82",
+        "phpstan/phpstan-symfony": "^0.12.21",
         "symfony/maker-bundle": "^1.28",
         "symfony/stopwatch": "^5.2",
         "symfony/web-profiler-bundle": "^5.2",

@@ -11,16 +11,12 @@ use Gedmo\Mapping\Annotation as Gedmo;
 trait Timestampable
 {
     /**
-     * @var DateTime $createdAt
-     *
      * @Gedmo\Timestampable(on="create")
      * @ORM\Column(type="datetime")
      */
     protected DateTimeInterface $createdAt;
 
     /**
-     * @var DateTime $updatedAt
-     *
      * @Gedmo\Timestampable(on="update")
      * @ORM\Column(type="datetime")
      */

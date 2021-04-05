@@ -9,6 +9,8 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class PinsController extends AbstractController
 {
+    private const ITEMS_PER_PAGE = 15;
+
     /**
      * @Route("/", name="homepage", methods="GET")
      * @param PinRepository $pinRepository

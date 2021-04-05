@@ -59,7 +59,7 @@ class Pin
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="pins")
      * @ORM\JoinColumn(nullable=false)
      */
-    private User $user;
+    private ?User $user;
 
     public function __construct()
     {
@@ -124,7 +124,7 @@ class Pin
         return $this;
     }
 
-    public function getUser(): ?User
+    public function getUser(): User
     {
         return $this->user;
     }

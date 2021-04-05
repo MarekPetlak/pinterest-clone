@@ -19,10 +19,8 @@ use SymfonyCasts\Bundle\VerifyEmail\Exception\VerifyEmailExceptionInterface;
 
 class RegistrationController extends AbstractController
 {
-    private $emailVerifier;
-
+    private EmailVerifier $emailVerifier;
     private EventDispatcherInterface $dispatcher;
-
 
     public function __construct(
         EmailVerifier $emailVerifier,
@@ -45,7 +43,14 @@ class RegistrationController extends AbstractController
         UserPasswordEncoderInterface $passwordEncoder,
         GuardAuthenticatorHandler $guardHandler,
         LoginFormAuthenticatior $authenticator
-    ): Response {
+    ): ?Response {
+
+        if ($this->getUser()) {
+            $this->addFlash('danger', 'You are already logged in!');
+
+            return $this->redirectToRoute('homepage');
+        }
+
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);

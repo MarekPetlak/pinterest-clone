@@ -26,20 +26,24 @@ class EmailConfirmationSubscriber implements EventSubscriberInterface
         $this->defaultSenderName = $defaultSenderName;
     }
 
-    public static function getSubscribedEvents(): iterable
+    /**
+     * @return array<string>
+     */
+    public static function getSubscribedEvents(): array
     {
         return [
             EmailConfirmationEvent::class => 'sendConfirmationEmail',
         ];
     }
 
-    public function sendConfirmationEmail(EmailConfirmationEvent $event) {
+    public function sendConfirmationEmail(EmailConfirmationEvent $event): void
+    {
         $user = $event->getUser();
 
         $this->emailVerifier->sendEmailConfirmation('app_verify_email', $user,
             (new TemplatedEmail())
                 ->from(new Address($this->defaultSenderEmail, $this->defaultSenderName))
-                ->to($user->getEmail())
+                ->to(new Address($user->getEmail()))
                 ->subject('Please Confirm your Email')
                 ->htmlTemplate('emails/registration/confirmation.html.twig')
         );
