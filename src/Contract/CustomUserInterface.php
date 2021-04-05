@@ -10,6 +10,6 @@ interface CustomUserInterface extends UserInterface
 {
     public function getId(): int;
     public function getEmail(): string;
-    public function setIsVerified(bool $isVerified): self;.
+    public function setIsVerified(bool $isVerified): self;
 
 }
