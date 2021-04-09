@@ -15,7 +15,7 @@
             <p class="lead text-muted">{{ app.user.email }}</p>
             <p class="small">Account created at &#128336; {{ app.user.createdAt|date("/d/m/Y H:i") }}</p>
             <nav class="mt-5">
-                <a href="{{ path('account_edit') }}">Edit account</a> | <a href="">Change password</a>
+                <a href="{{ path('account_edit') }}">Edit account</a> | <a href="{{ path('account_change_password') }}">Change password</a>
             </nav>
         </div>
     </div>

@@ -7,15 +7,33 @@ use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Security\Core\Validator\Constraints\UserPassword;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
 class ChangePasswordFormType extends AbstractType
 {
+    public const CURRENT_PASSWORD_REQUIRED_OPTION_NAME = 'current_password_is_required';
+
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        $builder
-            ->add('plainPassword', RepeatedType::class, [
+
+        if ($options[self::CURRENT_PASSWORD_REQUIRED_OPTION_NAME]) {
+            $builder
+                ->add('currentPassword', PasswordType::class, [
+                    'label'    => 'Current password',
+                    'constraints' => [
+                        new NotBlank([
+                            'message' => 'Please enter current password',
+                        ]),
+                        new UserPassword([
+                            'message' => 'Invalid current password',
+                        ])
+                    ]
+                ]);
+        }
+
+        $builder->add('plainPassword', RepeatedType::class, [
                 'type' => PasswordType::class,
                 'first_options' => [
                     'constraints' => [
@@ -44,6 +62,10 @@ class ChangePasswordFormType extends AbstractType
 
     public function configureOptions(OptionsResolver $resolver): void
     {
-        $resolver->setDefaults([]);
+        $resolver->setDefaults([
+            self::CURRENT_PASSWORD_REQUIRED_OPTION_NAME => false,
+        ]);
+
+        $resolver->setAllowedTypes(self::CURRENT_PASSWORD_REQUIRED_OPTION_NAME, 'bool');
     }
 }
