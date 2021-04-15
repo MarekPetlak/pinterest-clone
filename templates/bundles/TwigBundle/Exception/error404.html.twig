@@ -1,10 +1,14 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Nie bangla</h1>
+    <div class="row">
+        <div class="col-md-6 mx-auto text-center">
+            <h1 class="my-5">Page not found</h1>
 
-    <p>
-        The requested page couldn't be located. Checkout for any URL
-        misspelling or <a href="{{ path('homepage') }}">return to the homepage</a>.
-    </p>
+            <p>
+                The requested page couldn't be located. Checkout for any URL
+                misspelling or<br> <a href="{{ path('homepage') }}" class="btn btn-outline-primary text-decoration-none mt-3">return to the homepage</a>.
+            </p>
+        </div>
+    </div>
 {% endblock %}

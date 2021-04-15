@@ -40,6 +40,12 @@ class PinController extends AbstractController
      */
     public function create(Request $request): Response
     {
+        if (!$this->getUser()->isVerified()) {
+            $this->addFlash('danger', 'You have to verify your account first!');
+
+            return $this->redirectToRoute('homepage');
+        }
+
         $pin = new Pin();
 
         $form = $this->createForm(
@@ -73,6 +79,12 @@ class PinController extends AbstractController
      */
     public function edit(Pin $pin, Request $request): Response
     {
+        if ($this->getUser() != $pin->getUser()) {
+            $this->addFlash('danger', 'Access forbidden!');
+
+            return $this->redirectToRoute('homepage');
+        }
+
         $form = $this->createForm(
             PinType::class,
             $pin,
@@ -104,6 +116,12 @@ class PinController extends AbstractController
      */
     public function delete(Pin $pin, Request $request): Response
     {
+        if ($this->getUser() != $pin->getUser()) {
+            $this->addFlash('danger', 'Access forbidden!');
+
+            return $this->redirectToRoute('homepage');
+        }
+
         if ($this->isCsrfTokenValid(
             sprintf('pin_deletion_%d', $pin->getId()),
             $request->request->get('csrf_token'))

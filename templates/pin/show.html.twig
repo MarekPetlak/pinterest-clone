@@ -18,16 +18,19 @@
             </article>
 
             <nav class="text-right">
-                <a href="{{ path('pin_edit', {id: pin.id}) }}" class="btn btn-outline-primary">Edit</a>
-                <a href="#pin-delete-form" onclick="
-                        event.preventDefault();
-                        confirm('Czy usunąć pin #{{ pin.id }}') &&
-                        document.querySelector('#pin-delete-form').submit()
-                        " class="btn btn-outline-danger">Delete</a>
-                <form id="pin-delete-form" action="{{ path('pin_delete', {id: pin.id}) }}" method="POST" style="display: none" >
-                    <input type="hidden" name="_method" value="DELETE">
-                    <input type="hidden" name="csrf_token" value="{{ csrf_token('pin_deletion_' ~ pin.id) }}">
-                </form>
+                {% if pin.user == app.user %}
+                    <a href="{{ path('pin_edit', {id: pin.id}) }}" class="btn btn-outline-primary">Edit</a>
+                    <a href="#pin-delete-form" onclick="
+                            event.preventDefault();
+                            confirm('Czy usunąć pin #{{ pin.id }}') &&
+                            document.querySelector('#pin-delete-form').submit()
+                            " class="btn btn-outline-danger">Delete</a>
+                    <form id="pin-delete-form" action="{{ path('pin_delete', {id: pin.id}) }}" method="POST" style="display: none" >
+                        <input type="hidden" name="_method" value="DELETE">
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token('pin_deletion_' ~ pin.id) }}">
+                    </form>
+                {% endif %}
+
                 <a href="{{ path('homepage') }}" class="btn btn-link">Go back &rarr;</a>
             </nav>
         </div>

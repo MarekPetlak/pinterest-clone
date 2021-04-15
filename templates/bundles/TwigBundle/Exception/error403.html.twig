@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="row mx-auto">
+        <div class="col-md-6 mx-auto text-center">
+            <h1 class="my-5">Access Forbidden</h1>
+            <p>
+                You don't have access right to display this page.<br>
+                <a href="{{ path('homepage') }}" class="btn btn-outline-primary text-decoration-none mt-3">return to the homepage</a>
+            </p>
+        </div>
+    </div>
+{% endblock %}
