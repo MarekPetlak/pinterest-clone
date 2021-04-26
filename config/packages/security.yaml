@@ -43,6 +43,6 @@ security:
     # Note: Only the *first* access control that matches will be used
     access_control:
          - { path: ^/admin, roles: ROLE_ADMIN }
-         - { path: ^/account, roles: ROLE_USER }
-         - { path: ^/pin/create, roles: IS_AUTHENTICATED_FULLY }
-         - { path: ^/pin/\d+/(edit|delete), roles: IS_AUTHENTICATED_FULLY }
+         - { path: ^/account, roles: IS_AUTHENTICATED_FULLY }
+         - { path: ^/pin/create, roles: ROLE_USER }
+         - { path: ^/pin/\d+/(edit|delete), roles: ROLE_USER }
